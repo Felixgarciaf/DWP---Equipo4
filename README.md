@@ -24,15 +24,6 @@ Permitiendo informar de manera rápida y directa.
 - Gestión de horarios de suministro
 - Dashboard de estadísticas
 
-## Configuración Técnica
-
-## 🛠️ Tecnologías (pendiente)
-
-**Frontend**
--[]
-**Backend**
--[]
-
 ## 📁 Estructura
 
 app-web/
