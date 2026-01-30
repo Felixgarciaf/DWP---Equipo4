@@ -12,7 +12,7 @@ import Tips from "../pages/user/Tips";
 export default function UserRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/Login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} />
       <Route path="/reports" element={<Reports />} />
