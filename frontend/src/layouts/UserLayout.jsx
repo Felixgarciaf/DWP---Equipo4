@@ -1,21 +1,21 @@
 import { Outlet } from "react-router-dom";
-import MenuAdmin from "../components/MenuAdmin";
-import AdminNavbar from "../components/AdminNavbar";
-export default function AdminLayout() {
+import UserNavbar from "../components/UserNavbar";
+export default function UserLayout() {
   return (
     <div>
-      <header  style={{
+      <header
+        style={{
           display: "flex",
           alignItems: "center",
           gap: "10px",
           padding: "10px 20px",
           borderBottom: "1px solid #ccc",
-        }}>
-        <MenuAdmin />
-        <AdminNavbar />
+        }}
+      >
+        <UserNavbar />
       </header>
 
-      <main>
+      <main style={{ padding: "20px" }}>
         <Outlet />
       </main>
     </div>

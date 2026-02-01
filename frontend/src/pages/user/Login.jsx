@@ -23,13 +23,9 @@ export default function Login() {
 
       <br />
 
-      <button onClick={() => navigate("/home")}>
-        Iniciar sesión
-      </button>
+      <button onClick={() => navigate("/home")}>Iniciar sesión</button>
 
-      <button onClick={() => navigate("/register")}>
-        Registrarse
-      </button>
+      <button onClick={() => navigate("/register")}>Registrarse</button>
     </div>
   );
 }

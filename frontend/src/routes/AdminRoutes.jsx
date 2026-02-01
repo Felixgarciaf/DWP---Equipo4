@@ -11,15 +11,14 @@ import AdminLayout from "../layouts/AdminLayout";
 export default function AdminRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<AdminLogin />} />
+      <Route index element={<AdminLogin />} />
 
-      {/* RUTAS PROTEGIDAS ADMIN */}
       <Route element={<AdminLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/schedules" element={<CrudSchedules />} />
-        <Route path="/announcements" element={<CrudAnnouncements />} />
-        <Route path="/reports" element={<ManageReports />} />
-        <Route path="/tips" element={<CrudTips />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="schedules" element={<CrudSchedules />} />
+        <Route path="announcements" element={<CrudAnnouncements />} />
+        <Route path="reports" element={<ManageReports />} />
+        <Route path="tips" element={<CrudTips />} />
       </Route>
     </Routes>
   );

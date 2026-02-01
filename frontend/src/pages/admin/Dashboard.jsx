@@ -5,7 +5,6 @@ export default function Dashboard() {
 
       <p>Bienvenido al panel de administrador.</p>
 
-     
       <div style={{ display: "flex", gap: "20px", marginTop: "30px" }}>
         <div
           style={{
