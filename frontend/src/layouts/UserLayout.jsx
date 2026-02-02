@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import UserNavbar from "../components/UserNavbar";
+import Breadcrumbs from "../components/Breadcrumbs";
 export default function UserLayout() {
   return (
     <div>
@@ -16,6 +17,8 @@ export default function UserLayout() {
       </header>
 
       <main style={{ padding: "20px" }}>
+        <Breadcrumbs/>
+
         <Outlet />
       </main>
     </div>

@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import MenuAdmin from "../components/MenuAdmin";
 import AdminNavbar from "../components/AdminNavbar";
+import Breadcrumbs from "../components/Breadcrumbs";
 export default function AdminLayout() {
   return (
     <div>
@@ -16,6 +17,8 @@ export default function AdminLayout() {
       </header>
 
       <main>
+        <Breadcrumbs/>
+
         <Outlet />
       </main>
     </div>
