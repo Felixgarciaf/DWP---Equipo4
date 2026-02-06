@@ -5,9 +5,6 @@ export default function MenuAdmin() {
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const navigate = useNavigate();
 
-   const botonRef = useRef(null);
-  const menuRef = useRef(null);
-
   const cerrarSesion = () => {
     localStorage.removeItem("admin");
     navigate("/admin");
