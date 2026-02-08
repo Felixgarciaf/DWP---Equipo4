@@ -1,10 +1,34 @@
 export default function Notifications() {
   return (
-    <div>
-      <h1>Avisos y Notificaciones</h1>
+    <div className="notifications-page">
+     
+      <div className="notifications-header">
+        <h2>Avisos</h2>
+      </div>
 
-      <p>Corte programado mañana 9:00 AM</p>
-      <p>Servicio restablecido en zona centro</p>
+    
+      <div className="notifications-grid">
+      
+        <div className="notification-card">
+          <div className="notification-image"></div>
+
+          <div className="notification-content">
+            <div className="notification-line"></div>
+            <div className="notification-line short"></div>
+            <div className="notification-line tiny"></div>
+          </div>
+        </div>
+
+        <div className="notification-card">
+          <div className="notification-image"></div>
+
+          <div className="notification-content">
+            <div className="notification-line"></div>
+            <div className="notification-line short"></div>
+            <div className="notification-line tiny"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
