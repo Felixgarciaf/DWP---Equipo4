@@ -1,4 +1,3 @@
-/* ===== REGISTER ===== */
 .register-page {
   min-height: 100vh;
   background-color: #f3f4f6;
@@ -9,7 +8,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* BOTÓN INICIO */
 .btn-inicio {
   position: absolute;
   top: 20px;
@@ -22,7 +20,6 @@
   cursor: pointer;
 }
 
-/* TARJETA */
 .register-card {
   background-color: white;
   width: 520px;
@@ -31,7 +28,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* HEADER */
 .register-header {
   display: flex;
   justify-content: center;
@@ -45,7 +41,6 @@
   border-radius: 6px;
 }
 
-/* FORMULARIO */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -63,13 +58,11 @@
   border: 1px solid #d1d5db;
 }
 
-/* FILA DE CONTRASEÑAS */
 .form-row {
   display: flex;
   gap: 12px;
 }
 
-/* FOOTER */
 .register-footer {
   display: flex;
   justify-content: space-between;
@@ -82,7 +75,6 @@
   color: #6b7280;
 }
 
-/* BOTÓN */
 .btn-register {
   background-color: #2563eb;
   color: white;
@@ -96,8 +88,6 @@
   background-color: #1d4ed8;
 }
 
-/* ===== LOGIN (DISEÑO FINAL) ===== */
-
 .login-page {
   min-height: 100vh;
   background-color: #f3f4f6;
@@ -108,7 +98,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* BOTÓN INICIO */
 .btn-inicio {
   position: absolute;
   top: 20px;
@@ -121,7 +110,6 @@
   cursor: pointer;
 }
 
-/* TARJETA */
 .login-card {
   background-color: white;
   width: 420px;
@@ -130,7 +118,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* HEADER */
 .login-header {
   display: flex;
   justify-content: center;
@@ -145,7 +132,6 @@
   font-size: 18px;
 }
 
-/* FORMULARIO */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -163,7 +149,6 @@
   border: 1px solid #d1d5db;
 }
 
-/* BOTONES */
 .login-actions {
   display: flex;
   justify-content: space-between;
@@ -201,7 +186,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* SECCIÓN SUPERIOR */
 .home-hero {
   background-color: #e6f0ff;
   padding: 40px 60px;
@@ -213,7 +197,6 @@
   align-items: center;
 }
 
-/* IZQUIERDA */
 .home-left {
   max-width: 50%;
 }
@@ -252,7 +235,6 @@
   background-color: #1d4ed8;
 }
 
-/* DERECHA */
 .home-right {
   width: 40%;
 }
@@ -264,7 +246,6 @@
   border-radius: 8px;
 }
 
-/* SECCIÓN INFERIOR */
 .home-section {
   background-color: #ffffff;
   padding: 40px 60px;
@@ -284,7 +265,6 @@
   background-color: #d1d5db;
   border-radius: 6px;
 }
-/* ===== HOME NAVBAR ===== */
 
 .home-navbar {
   background-color: #e6f0ff;
@@ -298,7 +278,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* IZQUIERDA */
 .home-navbar-left {
   display: flex;
   align-items: center;
@@ -322,7 +301,6 @@
   color: #1f2937;
 }
 
-/* DERECHA */
 .home-navbar-menu {
   display: flex;
   align-items: center;
@@ -331,7 +309,6 @@
   padding-right: 12px;
 }
 
-/* BOTONES */
 .nav-pill {
   display: flex;
   align-items: center;
@@ -344,12 +321,10 @@
   font-size: 14px;
 }
 
-/* ACTIVO */
 .nav-pill.active {
   background-color: #2563eb;
   color: white;
 }
-/* ===== HORARIOS ===== */
 
 .schedule-page {
   padding: 30px 60px;
@@ -358,7 +333,6 @@
   min-height: 100vh;
 }
 
-/* HEADER */
 .schedule-header {
   display: flex;
   justify-content: center;
@@ -372,7 +346,6 @@
   border-radius: 6px;
 }
 
-/* FILTRO */
 .schedule-filter {
   display: flex;
   align-items: center;
@@ -390,7 +363,6 @@
   border: 1px solid #cbd5e1;
 }
 
-/* TABLA */
 .schedule-table-container {
   background-color: white;
   padding: 20px;
@@ -422,7 +394,6 @@
   border-right: 2px solid #6b7280;
 }
 
-/* HORARIOS */
 .time-box {
   background-color: #e6f0ff;
   color: #1e40af;
@@ -431,7 +402,6 @@
   font-size: 13px;
   display: inline-block;
 }
-/* ===== CONSEJOS ===== */
 
 .tips-page {
   padding: 30px 60px;
@@ -440,7 +410,6 @@
   min-height: 100vh;
 }
 
-/* HEADER */
 .tips-header {
   display: flex;
   justify-content: center;
@@ -455,14 +424,12 @@
   font-size: 18px;
 }
 
-/* LISTA */
 .tips-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* TARJETA DE CONSEJO */
 .tip-item {
   background-color: #e6f0ff;
   padding: 18px 22px;
@@ -481,7 +448,6 @@
   color: #1f2937;
   line-height: 1.5;
 }
-/* ===== AVISOS ===== */
 
 .notifications-page {
   padding: 30px 60px;
@@ -490,7 +456,6 @@
   min-height: 100vh;
 }
 
-/* HEADER */
 .notifications-header {
   display: flex;
   justify-content: center;
@@ -505,14 +470,12 @@
   font-size: 18px;
 }
 
-/* GRID */
 .notifications-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
 }
 
-/* CARD */
 .notification-card {
   background-color: white;
   padding: 18px;
@@ -520,7 +483,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* IMAGEN PLACEHOLDER */
 .notification-image {
   width: 100%;
   height: 140px;
@@ -529,7 +491,6 @@
   margin-bottom: 14px;
 }
 
-/* TEXTO PLACEHOLDER */
 .notification-content {
   display: flex;
   flex-direction: column;
@@ -552,7 +513,6 @@
   width: 40%;
   background-color: #6b7280;
 }
-/* ===== REPORTES ===== */
 
 .reports-page {
   padding: 30px 60px;
@@ -561,7 +521,6 @@
   min-height: 100vh;
 }
 
-/* HEADER */
 .reports-header {
   display: flex;
   justify-content: center;
@@ -576,7 +535,6 @@
   font-size: 18px;
 }
 
-/* DESCRIPCIÓN */
 .reports-description {
   text-align: center;
   font-size: 14px;
@@ -585,7 +543,6 @@
   margin: 0 auto 30px auto;
 }
 
-/* FORMULARIO */
 .reports-form {
   max-width: 600px;
   margin: 0 auto;
@@ -615,7 +572,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* BOTÓN */
 .reports-actions {
   display: flex;
   justify-content: center;
@@ -634,7 +590,6 @@
 .btn-report:hover {
   background-color: #15803d;
 }
-/* ===== ADMIN LOGIN ===== */
 
 .admin-login-page {
   min-height: 100vh;
@@ -681,7 +636,6 @@
 .btn-admin-login:hover {
   background-color: #1d4ed8;
 }
-/* ===== ADMIN DASHBOARD ===== */
 
 .admin-dashboard-page {
   padding: 40px 60px;
@@ -690,7 +644,6 @@
   min-height: 100vh;
 }
 
-/* TÍTULO */
 .admin-dashboard-title {
   text-align: center;
   font-size: 26px;
@@ -698,7 +651,6 @@
   margin-bottom: 40px;
 }
 
-/* CONTENEDOR DE CARDS */
 .admin-dashboard-cards {
   display: flex;
   justify-content: center;
@@ -706,7 +658,6 @@
   flex-wrap: wrap;
 }
 
-/* CARD */
 .admin-card {
   background-color: #ffffff;
   width: 340px;
@@ -718,7 +669,6 @@
   align-items: center;
 }
 
-/* CÍRCULO ROJO */
 .report-circle {
   width: 90px;
   height: 90px;
@@ -735,20 +685,17 @@
   font-weight: bold;
 }
 
-/* TEXTO CARD */
 .card-text {
   font-size: 15px;
   text-align: center;
   font-weight: 500;
 }
 
-/* TÍTULO AVISOS */
 .card-title {
   font-size: 16px;
   margin-bottom: 14px;
 }
 
-/* LISTA AVISOS */
 .alerts-list {
   list-style: none;
   padding: 0;
@@ -758,7 +705,6 @@
 .alerts-list li {
   margin-bottom: 10px;
 }
-/* ===== ADMIN CONSEJOS ===== */
 
 .admin-tips-page {
   display: flex;
@@ -836,7 +782,6 @@
 .btn-publish:hover {
   background-color: #15803d;
 }
-/* ===== ADMIN HORARIOS ===== */
 
 .admin-schedule-page {
   min-height: 100vh;
@@ -883,7 +828,6 @@
   border: 1px solid #cbd5e1;
 }
 
-/* BOTONES */
 .admin-schedule-actions {
   display: flex;
   justify-content: space-between;
@@ -924,7 +868,6 @@
 .btn-save:hover {
   background-color: #15803d;
 }
-/* ===== ADMIN REPORTES ===== */
 
 .admin-reports-page {
   padding: 40px 60px;
@@ -939,7 +882,6 @@
   margin-bottom: 30px;
 }
 
-/* CONTENEDOR */
 .admin-reports-wrapper {
   display: flex;
   align-items: center;
@@ -947,7 +889,6 @@
   gap: 25px;
 }
 
-/* TARJETA */
 .admin-report-card {
   background-color: #e6f0ff;
   width: 220px;
@@ -961,7 +902,6 @@
   margin-bottom: 10px;
 }
 
-/* BOTONES */
 .admin-report-actions {
   display: flex;
   justify-content: space-between;
@@ -988,7 +928,6 @@
   cursor: pointer;
 }
 
-/* FLECHAS */
 .arrow-btn {
   background-color: transparent;
   border: none;
@@ -1000,7 +939,6 @@
 .arrow-btn:hover {
   color: #2563eb;
 }
-/* ===== ADMIN AVISOS ===== */
 
 .admin-announcements-page {
   min-height: 100vh;
@@ -1019,7 +957,6 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* TÍTULO */
 .admin-announcements-title {
   background-color: white;
   color: #2563eb;
@@ -1031,7 +968,6 @@
   line-height: 1.2;
 }
 
-/* FORMULARIO */
 .admin-announcements-card .form-group {
   display: flex;
   flex-direction: column;
@@ -1051,7 +987,6 @@
   resize: none;
 }
 
-/* BOTONES */
 .admin-announcements-actions {
   display: flex;
   justify-content: center;
@@ -1084,7 +1019,6 @@
 .btn-publish:hover {
   background-color: #15803d;
 }
-/* ===== USER NAVBAR FIJO ===== */
 
 .user-navbar {
   position: sticky;
@@ -1098,7 +1032,6 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* IZQUIERDA */
 .user-navbar-left {
   display: flex;
   align-items: center;
@@ -1111,14 +1044,12 @@
   border: 3px solid #2563eb;
 }
 
-/* CENTRO */
 .user-navbar-center {
   display: flex;
   justify-content: center;
   gap: 12px;
 }
 
-/* DERECHA */
 .user-navbar-right {
   display: flex;
   align-items: center;
@@ -1134,7 +1065,6 @@
   border: 1px solid #d1d5db;
 }
 
-/* BOTONES DEL MENÚ */
 .nav-pill {
   background-color: white;
   padding: 6px 16px;
@@ -1149,7 +1079,6 @@
   background-color: #2563eb;
   color: white;
 }
-/* ===== HOME NAVBAR (USUARIO) ===== */
 
 .home-navbar {
   width: 100%;
