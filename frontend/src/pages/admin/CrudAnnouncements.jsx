@@ -1,21 +1,28 @@
-import { useNavigate } from "react-router-dom";
+import "../../styles/styles.css";
 
 export default function CrudAnnouncements() {
-  const navigate = useNavigate();
-
   return (
-    <div>
-      <h1>Anuncios</h1>
+    <div className="admin-announcements-page">
+      <div className="admin-announcements-card">
+        <h2 className="admin-announcements-title">
+          Crear Aviso <br /> Comunitario
+        </h2>
 
-      <input placeholder="Nuevo anuncio" />
-      <br />
+        <div className="form-group">
+          <label>Título del mensaje:</label>
+          <input type="text" />
+        </div>
 
-      <button>Publicar</button>
-      <button>Editar</button>
-      <button>Eliminar</button>
+        <div className="form-group">
+          <label>Mensaje:</label>
+          <textarea rows="5"></textarea>
+        </div>
 
-      <br />
-      <button onClick={() => navigate("/admin/dashboard")}>Volver</button>
+        <div className="admin-announcements-actions">
+          <button className="btn-cancel">Cancelar</button>
+          <button className="btn-publish">Publicar</button>
+        </div>
+      </div>
     </div>
   );
 }
