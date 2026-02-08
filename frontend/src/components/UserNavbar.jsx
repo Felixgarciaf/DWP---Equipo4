@@ -1,32 +1,51 @@
-import { useLocation, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import KeyboardNav from "./KeyboardNav";
-import { navLinkStyle } from "../styles/navLinkStyle";
-export default function UserNavbar() {
-      const location = useLocation();
+import "../styles/styles.css";
 
+export default function UserNavbar() {
   const routes = [
     "/",
-    "/register",
     "/home",
     "/reports",
-    "/status",
     "/notifications",
     "/schedule",
     "/tips",
   ];
 
-  const currentIndex = routes.indexOf(location.pathname);
-
   return (
-    <nav aria-label="Menú de usuario"  style={{ display: "flex", gap: "10px" , marginLeft: "900px"}}>
-      <KeyboardNav routes={routes} currentIndex={currentIndex} />
+    <header className="home-navbar">
+     
+      <div className="home-navbar-left">
+        <div className="user-avatar"></div>
+        <NavLink to="/" className="login-pill">
+          Iniciar sesión
+        </NavLink>
+      </div>
 
-      <NavLink to="/login" style={navLinkStyle}>Iniciar sesión</NavLink>
-      <NavLink to="/home" style={navLinkStyle}>Inicio</NavLink>
-      <NavLink to="/reports" style={navLinkStyle}>Reportes</NavLink>
-      <NavLink to="/notifications" style={navLinkStyle}>Avisos</NavLink>
-      <NavLink to="/schedule" style={navLinkStyle}>Horarios</NavLink>
-      <NavLink to="/tips" style={navLinkStyle}>Consejos</NavLink>
-    </nav>
+     
+      <nav className="home-navbar-menu" aria-label="Menú de usuario">
+        <KeyboardNav routes={routes} />
+        
+        <NavLink to="/home" className="nav-pill">
+          Inicio
+        </NavLink>
+
+        <NavLink to="/reports" className="nav-pill">
+          Reportes
+        </NavLink>
+
+        <NavLink to="/notifications" className="nav-pill">
+          Avisos
+        </NavLink>
+
+        <NavLink to="/schedule" className="nav-pill">
+          Horarios
+        </NavLink>
+
+        <NavLink to="/tips" className="nav-pill">
+          Consejos
+        </NavLink>
+      </nav>
+    </header>
   );
 }
