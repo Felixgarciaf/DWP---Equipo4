@@ -1,21 +1,41 @@
-import { useNavigate } from "react-router-dom";
+import "../../styles/styles.css";
 
 export default function CrudSchedules() {
-  const navigate = useNavigate();
-
   return (
-    <div>
-      <h1>Horarios de corte de agua</h1>
+    <div className="admin-schedule-page">
+      <div className="admin-schedule-card">
+        <h2 className="admin-schedule-title">
+          Crear Horario de Abastecimiento
+        </h2>
 
-      <input placeholder="Nuevo horario" />
-      <br />
+        <div className="admin-schedule-form">
+          <div className="form-group">
+            <label>Zona:</label>
+            <input type="text" />
+          </div>
 
-      <button>Crear</button>
-      <button>Editar</button>
-      <button>Eliminar</button>
+          <div className="form-group">
+            <label>Día:</label>
+            <input type="text" />
+          </div>
 
-      <br />
-      <button onClick={() => navigate("/admin/dashboard")}>Volver</button>
+          <div className="form-group">
+            <label>Hora Inicio:</label>
+            <input type="time" />
+          </div>
+
+          <div className="form-group">
+            <label>Hora Fin:</label>
+            <input type="time" />
+          </div>
+
+          <div className="admin-schedule-actions">
+            <button className="btn-delete">Eliminar</button>
+            <button className="btn-cancel">Cancelar</button>
+            <button className="btn-save">Guardar</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
