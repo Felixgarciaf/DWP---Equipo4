@@ -1,13 +1,43 @@
 export default function Reports() {
   return (
-    <div>
-      <h1>Reportar Escasez de Agua</h1>
-      <input placeholder="Colonia / Zona" />
-      <br />
-      <textarea placeholder="Descripción del problema" />
-      <br />
+    <div className="reports-page">
+      
+      <div className="reports-header">
+        <h2>Reportes de Agua</h2>
+      </div>
 
-      <button>Enviar Reporte</button>
+      <p className="reports-description">
+        Utiliza este formulario para reportar cualquier problema relacionado
+        con el agua en tu área. Proporciona la dirección y una descripción
+        detallada del problema, y nuestro equipo se pondrá en contacto contigo
+        lo antes posible.
+      </p>
+
+      <div className="reports-form">
+        <div className="form-group">
+          <label>Dirección:</label>
+          <input type="text" />
+        </div>
+
+        <div className="form-group">
+          <label>Urgencia:</label>
+          <select>
+            <option value="">Selecciona una opción</option>
+            <option>Baja</option>
+            <option>Media</option>
+            <option>Alta</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Descripción del Reporte:</label>
+          <textarea rows="4"></textarea>
+        </div>
+
+        <div className="reports-actions">
+          <button className="btn-report">Realizar Reporte</button>
+        </div>
+      </div>
     </div>
   );
 }
