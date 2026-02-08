@@ -1,21 +1,29 @@
-import { useNavigate } from "react-router-dom";
+import "../../styles/styles.css";
 
 export default function CrudTips() {
-  const navigate = useNavigate();
-
   return (
-    <div>
-      <h1>Consejos para cuidar el agua</h1>
+    <div className="admin-tips-page">
+      <div className="admin-tips-card">
+        <h2 className="admin-tips-title">Consejos de ahorro</h2>
 
-      <input placeholder="Nuevo consejo" />
-      <br />
+        <div className="form-group">
+          <label>Título del Consejo:</label>
+          <input type="text" placeholder="Ej. Cierra la llave al cepillarte" />
+        </div>
 
-      <button>Crear</button>
-      <button>Editar</button>
-      <button>Eliminar</button>
+        <div className="form-group">
+          <label>Descripción:</label>
+          <textarea
+            rows="4"
+            placeholder="Describe el consejo de ahorro de agua"
+          ></textarea>
+        </div>
 
-      <br />
-      <button onClick={() => navigate("/admin/dashboard")}>Volver</button>
+        <div className="admin-tips-actions">
+          <button className="btn-cancel">Cancelar</button>
+          <button className="btn-publish">Publicar</button>
+        </div>
+      </div>
     </div>
   );
 }
