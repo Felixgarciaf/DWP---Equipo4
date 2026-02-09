@@ -1,8 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import { useRef, useEffect } from "react";
 import "../../styles/styles.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
 
   return (
     <div className="login-page">
@@ -13,7 +19,7 @@ export default function Login() {
       <div className="login-card">
      
         <div className="login-header">
-          <h2>Inicio de sesión</h2>
+          <h2 ref={headingRef} tabIndex="-1">Inicio de sesión</h2>
         </div>
 
         <div className="form-group">

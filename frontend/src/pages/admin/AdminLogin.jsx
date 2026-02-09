@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/styles.css";
 
@@ -6,6 +6,11 @@ export default function AdminLogin() {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const userRef = useRef(null);
+
+  useEffect(() => {
+    userRef.current?.focus();
+  }, []);
 
   const handleLogin = () => {
   
@@ -27,6 +32,7 @@ export default function AdminLogin() {
           <input
             type="text"
             placeholder="admin"
+            ref={userRef}
             value={user}
             onChange={(e) => setUser(e.target.value)}
           />

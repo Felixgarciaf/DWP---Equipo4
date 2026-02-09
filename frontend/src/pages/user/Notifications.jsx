@@ -1,9 +1,17 @@
+import { useRef, useEffect } from "react";
+
 export default function Notifications() {
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
   return (
     <div className="notifications-page">
      
       <div className="notifications-header">
-        <h2>Avisos</h2>
+        <h2 ref={headingRef} tabIndex="-1">Avisos</h2>
       </div>
 
     

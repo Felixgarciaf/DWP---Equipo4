@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import KeyboardNav from "./KeyboardNav";
 import "../styles/styles.css";
 
 export default function UserNavbar() {
+  const location = useLocation();
   const routes = [
     "/",
     "/home",
@@ -11,6 +12,8 @@ export default function UserNavbar() {
     "/schedule",
     "/tips",
   ];
+
+  const currentIndex = routes.indexOf(location.pathname);
 
   return (
     <header className="home-navbar">
@@ -24,7 +27,7 @@ export default function UserNavbar() {
 
      
       <nav className="home-navbar-menu" aria-label="Menú de usuario">
-        <KeyboardNav routes={routes} />
+        <KeyboardNav routes={routes} currentIndex={currentIndex} />
         
         <NavLink to="/home" className="nav-pill">
           Inicio

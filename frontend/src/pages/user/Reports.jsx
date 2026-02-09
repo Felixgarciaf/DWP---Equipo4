@@ -1,9 +1,17 @@
+import { useRef, useEffect } from "react";
+
 export default function Reports() {
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
   return (
     <div className="reports-page">
       
       <div className="reports-header">
-        <h2>Reportes de Agua</h2>
+        <h2 ref={headingRef} tabIndex="-1">Reportes de Agua</h2>
       </div>
 
       <p className="reports-description">

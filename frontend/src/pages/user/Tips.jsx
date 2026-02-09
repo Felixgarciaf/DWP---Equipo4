@@ -1,9 +1,17 @@
+import { useRef, useEffect } from "react";
+
 export default function Tips() {
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
   return (
     <div className="tips-page">
       
       <div className="tips-header">
-        <h2>Consejos de cuidados contra el agua</h2>
+        <h2 ref={headingRef} tabIndex="-1">Consejos de cuidados contra el agua</h2>
       </div>
 
      

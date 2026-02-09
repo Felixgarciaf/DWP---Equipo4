@@ -1,11 +1,18 @@
+import { useRef, useEffect } from "react";
 import "../../styles/styles.css";
 
 export default function Schedule() {
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
   return (
     <div className="schedule-page">
    
       <div className="schedule-header">
-        <h2>Horarios</h2>
+        <h2 ref={headingRef} tabIndex="-1">Horarios</h2>
       </div>
 
       <div className="schedule-filter">

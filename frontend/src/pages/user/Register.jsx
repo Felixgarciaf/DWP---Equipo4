@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/styles.css";
 
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword,] = useState(false);
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
 
   return (
     <div className="register-page">
@@ -16,7 +21,7 @@ export default function Register() {
       <div className="register-card">
         
         <div className="register-header">
-          <h2>Registro</h2>
+          <h2 ref={headingRef} tabIndex="-1">Registro</h2>
         </div>
 
         <div className="form-group">
