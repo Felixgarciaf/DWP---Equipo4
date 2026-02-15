@@ -10,7 +10,7 @@ export default function AdminLogin() {
   const [errorUser, setErrorUser] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [mensajeError, setMensajeError] = useState("");
-
+  const [loading, setLoading] = useState(false); 
   const handleLogin = () => {
     let hayError = false;
 
@@ -34,10 +34,13 @@ export default function AdminLogin() {
     }
 
     setMensajeError("");
+    setLoading(true); 
 
-    // 👉 simulación de login admin
-    localStorage.setItem("admin", "true");
-    navigate("/admin/dashboard");
+    setTimeout(() => {
+      localStorage.setItem("admin", "true");
+      setLoading(false);
+      navigate("/admin/dashboard");
+    }, 1500);
   };
 
   return (
@@ -99,8 +102,12 @@ export default function AdminLogin() {
           )}
         </div>
 
-        <button className="btn-admin-login" onClick={handleLogin}>
-          Iniciar sesión
+        <button
+          className="btn-admin-login"
+          onClick={handleLogin}
+          disabled={loading} 
+        >
+          {loading ? "Cargando..." : "Iniciar sesión"}
         </button>
       </div>
     </div>
