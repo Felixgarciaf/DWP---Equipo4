@@ -6,14 +6,27 @@ export default function KeyboardNav({ routes, currentIndex }) {
 
   useEffect(() => {
     const handleKey = (e) => {
+      const tag = e.target.tagName;
+
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") {
+        return;
+      }
+
+      if (currentIndex === -1) return;
+
       if (e.key === "ArrowRight") {
-        const next = routes[currentIndex + 1];
-        if (next) navigate(next);
+        const nextIndex = (currentIndex + 1) % routes.length;
+        navigate(routes[nextIndex]);
       }
 
       if (e.key === "ArrowLeft") {
-        const prev = routes[currentIndex - 1];
-        if (prev) navigate(prev);
+        const prevIndex =
+          (currentIndex - 1 + routes.length) % routes.length;
+        navigate(routes[prevIndex]);
+      }
+
+      if (e.key === "Enter") {
+        navigate(routes[currentIndex]);
       }
     };
 
