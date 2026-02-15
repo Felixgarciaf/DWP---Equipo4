@@ -1,9 +1,9 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useRef } from "react";
 import KeyboardNav from "./KeyboardNav";
 import "../styles/styles.css";
 
 export default function UserNavbar() {
-  const location = useLocation();
   const routes = [
     "/",
     "/home",
@@ -13,22 +13,50 @@ export default function UserNavbar() {
     "/tips",
   ];
 
-  const currentIndex = routes.indexOf(location.pathname);
+  const navRef = useRef(null); 
+
+  const manejarTeclado = (e) => {
+    const items = navRef.current?.querySelectorAll(".nav-pill");
+    if (!items || items.length === 0) return;
+
+    const currentIndex = Array.from(items).indexOf(document.activeElement);
+
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % items.length;
+      items[nextIndex].focus();
+    }
+
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIndex =
+        (currentIndex - 1 + items.length) % items.length;
+      items[prevIndex].focus();
+    }
+
+    if (e.key === "Enter") {
+      document.activeElement.click();
+    }
+  };
 
   return (
     <header className="home-navbar">
-     
+      
       <div className="home-navbar-left">
         <div className="user-avatar"></div>
         <NavLink to="/" className="login-pill">
           Iniciar sesión
         </NavLink>
       </div>
+      
+      <nav
+        className="home-navbar-menu"
+        aria-label="Menú de usuario"
+        ref={navRef}              
+        onKeyDown={manejarTeclado} 
+      >
+        <KeyboardNav routes={routes} />
 
-     
-      <nav className="home-navbar-menu" aria-label="Menú de usuario">
-        <KeyboardNav routes={routes} currentIndex={currentIndex} />
-        
         <NavLink to="/home" className="nav-pill">
           Inicio
         </NavLink>
