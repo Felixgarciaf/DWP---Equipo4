@@ -52,4 +52,4 @@ jobs:
 
       - name: Dockerización final 
         run: |
-          docker build -t frontend-equipo4:latest -f Dockerfile .
+          docker build -t frontend-equipo4:latest -f ./Dockerfile .
