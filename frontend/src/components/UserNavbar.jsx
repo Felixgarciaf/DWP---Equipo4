@@ -1,17 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useRef } from "react";
-import KeyboardNav from "./KeyboardNav";
 import "../styles/styles.css";
 
 export default function UserNavbar() {
-  const routes = [
-    "/",
-    "/home",
-    "/reports",
-    "/notifications",
-    "/schedule",
-    "/tips",
-  ];
 
   const navRef = useRef(null); 
 
@@ -20,6 +11,7 @@ export default function UserNavbar() {
     if (!items || items.length === 0) return;
 
     const currentIndex = Array.from(items).indexOf(document.activeElement);
+    if (currentIndex === -1) return;
 
     if (e.key === "ArrowRight") {
       e.preventDefault();
@@ -34,9 +26,6 @@ export default function UserNavbar() {
       items[prevIndex].focus();
     }
 
-    if (e.key === "Enter") {
-      document.activeElement.click();
-    }
   };
 
   return (
@@ -55,7 +44,6 @@ export default function UserNavbar() {
         ref={navRef}              
         onKeyDown={manejarTeclado} 
       >
-        <KeyboardNav routes={routes} />
 
         <NavLink to="/home" className="nav-pill">
           Inicio

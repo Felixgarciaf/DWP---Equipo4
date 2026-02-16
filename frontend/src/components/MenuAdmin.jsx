@@ -5,7 +5,7 @@ export default function MenuAdmin() {
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const navigate = useNavigate();
   const toggleButtonRef = useRef(null);
-  const firstMenuItemRef = useRef(null);
+  const menuRef = useRef(null);
 
   const cerrarSesion = () => {
     localStorage.removeItem("admin");
@@ -15,26 +15,43 @@ export default function MenuAdmin() {
   };
 
   useEffect(() => {
-    if (!mostrarMenu) return;
+    if(!mostrarMenu) return; 
 
-    const timer = setTimeout(() => {
-      firstMenuItemRef.current?.focus();
-    }, 0);
+    const firstItem = menuRef.current?.querySelector("button");
+    firstItem?.focus();
 
     const handleKeyDown = (e) => {
+      const items = menuRef.current?.querySelectorAll("button");
+      if (!items || items.length === 0) return;
+
+      const currentIndex = Array.from(items).indexOf(document.activeElement);
+
       if (e.key === "Escape") {
         setMostrarMenu(false);
         toggleButtonRef.current?.focus();
       }
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        const next = (currentIndex + 1) % items.length;
+        items[next].focus();
+      }
+
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        const prev =
+          (currentIndex - 1 + items.length) % items.length;
+        items[prev].focus();
+      }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    menuRef.current?.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      clearTimeout(timer);
-      document.removeEventListener("keydown", handleKeyDown);
+      menuRef.current?.removeEventListener("keydown", handleKeyDown);
     };
   }, [mostrarMenu]);
+
 
   return (
     <div style={{ position: "relative" }}>
@@ -54,6 +71,7 @@ export default function MenuAdmin() {
           id="admin-menu"
           role="menu"
           aria-labelledby="admin-toggle"
+          ref={menuRef}
           style={{
             position: "absolute",
             top: "110%",

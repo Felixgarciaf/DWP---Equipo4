@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "../../styles/styles.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const userRef = useRef(null)
 
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
@@ -15,14 +16,15 @@ export default function Login() {
   const manejarLogin = () => {
     let hayError = false;
 
-    if (usuario.trim() === "") {
+    if (usuario.trim()) {
       setErrorUsuario(true);
+      userRef.current?.focus();
       hayError = true;
     } else {
       setErrorUsuario(false);
     }
 
-    if (password.trim() === "") {
+    if (password.trim()) {
       setErrorPassword(true);
       hayError = true;
     } else {
@@ -38,9 +40,7 @@ export default function Login() {
     setLoading(true);
 
     setTimeout(() => {
-      // ✅ NUEVO: Guardar sesión
       localStorage.setItem("user", usuario);
-
       setLoading(false);
       navigate("/home");
     }, 1500);
@@ -48,6 +48,7 @@ export default function Login() {
 
   return (
     <div className="login-page">
+          
       <button className="btn-inicio" onClick={() => navigate("/")}>
         Inicio
       </button>
@@ -56,7 +57,13 @@ export default function Login() {
         <div className="login-header">
           <h2>Inicio de sesión</h2>
         </div>
-
+      
+      <form
+        onSubmit={(e) => {
+        e.preventDefault();
+        manejarLogin();
+        }}
+        noValidate> 
         {mensajeError && (
           <p className="error-message" role="alert">
             {mensajeError}
@@ -123,7 +130,10 @@ export default function Login() {
           >
             {loading ? "Cargando..." : "Iniciar sesión"}
           </button>
+          
+
         </div>
+        </form>
       </div>
     </div>
   );

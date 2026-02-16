@@ -14,8 +14,8 @@ export default function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route element={<UserLayout />}>
-        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/status" element={<Status />} />

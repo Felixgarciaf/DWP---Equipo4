@@ -1,60 +1,40 @@
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import KeyboardNav from "./KeyboardNav";
+import { useEffect, useRef } from "react";
 import { navLinkStyle } from "../styles/navLinkStyle";
-
-const routes = [
-  "/admin/dashboard",
-  "/admin/reports",
-  "/admin/announcements",
-  "/admin/schedules",
-  "/admin/tips",
-];
 
 export default function AdminNavbar() {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navRef = useRef(null);
 
-  // 🔥 CORRECCIÓN IMPORTANTE
-  const currentIndex = routes.findIndex((route) =>
-    location.pathname.startsWith(route)
-  );
+  const handleKeyboard = (e) => {
+    const links = navRef.current?.querySelectorAll("a");
+    if (!links || links.length === 0) return;
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (currentIndex < 0) return;
+  const currentIndex = Array.from(links).indexOf(document.activeElement);
+  if (currentIndex === -1) return;
 
-      if (e.key === "ArrowRight") {
-        const nextIndex = (currentIndex + 1) % routes.length;
-        navigate(routes[nextIndex]);
-      }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % links.length;
+      links[nextIndex].focus();
+    }
 
-      if (e.key === "ArrowLeft") {
-        const prevIndex =
-          (currentIndex - 1 + routes.length) % routes.length;
-        navigate(routes[prevIndex]);
-      }
-
-      if (e.key === "Enter") {
-        navigate(routes[currentIndex]);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentIndex, navigate]);
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const prevIndex =
+        (currentIndex - 1 + links.length) % links.length;
+      links[prevIndex].focus();
+    }
+  };
 
   return (
     <nav
+      ref={navRef}
       aria-label="Navegación principal del administrador"
+      onKeyDown={handleKeyboard}
       role="navigation"
       style={{ display: "flex", gap: "0px", marginLeft: "900px" }}
     >
-      <KeyboardNav
-        routes={routes}
-        currentIndex={currentIndex}
-        aria-label="Navegación por teclado del administrador"
-      />
 
       <NavLink
         to="/admin/dashboard"

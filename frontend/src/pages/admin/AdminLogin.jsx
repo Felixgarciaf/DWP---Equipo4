@@ -1,40 +1,54 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/styles.css";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
 
+  const userRef = useRef(null);
+  const passwordRef = useRef(null);
+
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [errorUser, setErrorUser] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
+  const [errors, setErrors] = useState({});
   const [mensajeError, setMensajeError] = useState("");
-  const [loading, setLoading] = useState(false); 
-  const handleLogin = () => {
-    let hayError = false;
+  const [loading, setLoading] = useState(false);
 
-    if (user.trim() === "") {
-      setErrorUser(true);
-      hayError = true;
-    } else {
-      setErrorUser(false);
+  const validar = () => {
+    const nuevosErrores = {};
+
+    if (!user.trim()) {
+      nuevosErrores.user = "El usuario es obligatorio";
     }
 
-    if (password.trim() === "") {
-      setErrorPassword(true);
-      hayError = true;
-    } else {
-      setErrorPassword(false);
+    if (!password.trim()) {
+      nuevosErrores.password = "La contraseña es obligatoria";
     }
 
-    if (hayError) {
+    return nuevosErrores;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validacion = validar();
+
+    if (Object.keys(validacion).length > 0) {
+      setErrors(validacion);
       setMensajeError("Todos los campos son obligatorios.");
+
+      if (validacion.user) {
+        userRef.current?.focus();
+      } else if (validacion.password) {
+        passwordRef.current?.focus();
+      }
+
       return;
     }
 
+    setErrors({});
     setMensajeError("");
-    setLoading(true); 
+    setLoading(true);
 
     setTimeout(() => {
       localStorage.setItem("admin", "true");
@@ -45,70 +59,83 @@ export default function AdminLogin() {
 
   return (
     <div className="admin-login-page">
-      <div className="admin-login-card">
+      <div
+        className="admin-login-card"
+        aria-busy={loading}
+      >
         <div className="admin-login-header">
-          <h2>Inicio de sesión</h2>
+          <h2>Inicio de sesión administrador</h2>
         </div>
 
         {mensajeError && (
-          <p className="error-message" role="alert">
+          <div role="alert" aria-live="assertive" className="error-message">
             {mensajeError}
-          </p>
+          </div>
         )}
 
-        <div className="form-group">
-          <label>Usuario</label>
-          <input
-            type="text"
-            placeholder="admin"
-            value={user}
-            onChange={(e) => {
-              setUser(e.target.value);
-              if (e.target.value.trim() !== "") {
-                setErrorUser(false);
-                setMensajeError("");
-              }
-            }}
-            className={errorUser ? "input-error" : ""}
-            aria-invalid={errorUser ? "true" : "false"}
-          />
-          {errorUser && (
-            <p className="error-message" role="alert">
-              El usuario es obligatorio
-            </p>
-          )}
-        </div>
+        <form onSubmit={handleSubmit} noValidate>
 
-        <div className="form-group">
-          <label>Contraseña</label>
-          <input
-            type="password"
-            placeholder="********"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              if (e.target.value.trim() !== "") {
-                setErrorPassword(false);
-                setMensajeError("");
-              }
-            }}
-            className={errorPassword ? "input-error" : ""}
-            aria-invalid={errorPassword ? "true" : "false"}
-          />
-          {errorPassword && (
-            <p className="error-message" role="alert">
-              La contraseña es obligatoria
-            </p>
-          )}
-        </div>
+          <div className="form-group">
+            <label htmlFor="admin-user">Usuario</label>
+            <input
+              ref={userRef}
+              id="admin-user"
+              type="text"
+              placeholder="admin"
+              value={user}
+              onChange={(e) => {
+                setUser(e.target.value);
+                if (errors.user) {
+                  setErrors({ ...errors, user: undefined });
+                }
+              }}
+              aria-invalid={!!errors.user}
+              aria-describedby={errors.user ? "admin-user-error" : undefined}
+              className={errors.user ? "input-error" : ""}
+            />
 
-        <button
-          className="btn-admin-login"
-          onClick={handleLogin}
-          disabled={loading} 
-        >
-          {loading ? "Cargando..." : "Iniciar sesión"}
-        </button>
+            {errors.user && (
+              <p id="admin-user-error" className="error-message">
+                {errors.user}
+              </p>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="admin-password">Contraseña</label>
+            <input
+              ref={passwordRef}
+              id="admin-password"
+              type="password"
+              placeholder="********"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (errors.password) {
+                  setErrors({ ...errors, password: undefined });
+                }
+              }}
+              aria-invalid={!!errors.password}
+              aria-describedby={errors.password ? "admin-password-error" : undefined}
+              className={errors.password ? "input-error" : ""}
+            />
+
+            {errors.password && (
+              <p id="admin-password-error" className="error-message">
+                {errors.password}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="btn-admin-login"
+            disabled={loading}
+          >
+            {loading ? "Cargando..." : "Iniciar sesión"}
+          </button>
+
+        </form>
       </div>
     </div>
   );
