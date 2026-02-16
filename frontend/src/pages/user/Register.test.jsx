@@ -25,14 +25,14 @@ describe('Register Component', () => {
     expect(passwordInputs.length).toBeGreaterThan(0);
   });
 
-  it('debería contener botón de Registrarte', () => {
+  it('debería contener botón de Registrarse', () => {
     renderWithRouter(<Register />);
-    expect(screen.getByText('Registrarte')).toBeInTheDocument();
+    expect(screen.getByText('Registrarse')).toBeInTheDocument();
   });
 
   it('debería mostrar enlace de login existente', () => {
     renderWithRouter(<Register />);
-    expect(screen.getByText('¿Ya tienes una cuenta?')).toBeInTheDocument();
+    expect(screen.getByText(/¿Ya tienes una cuenta?/i)).toBeInTheDocument();
   });
 
   it('debería enfocar el input de nombre al montar', () => {

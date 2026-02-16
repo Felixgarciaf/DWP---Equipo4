@@ -207,6 +207,24 @@ export default function Register() {
           </div>
 
           <div className="register-footer">
+            <span className="login-link">
+              ¿Ya tienes una cuenta?{" "}
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#2563eb",
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  padding: 0,
+                  font: "inherit",
+                }}
+              >
+                Inicia sesión
+              </button>
+            </span>
             <button
               type="submit"
               className="btn-register"
