@@ -4,7 +4,7 @@ Documento que describe todos los **estados accesibles, atributos ARIA, jerarquí
 
 ---
 
-## 🎯 Índice
+## Índice
 
 1. [Atributos ARIA Implementados](#atributos-aria-implementados)
 2. [Estados de Enfoque por Componente](#estados-de-enfoque-por-componente)
@@ -14,7 +14,7 @@ Documento que describe todos los **estados accesibles, atributos ARIA, jerarquí
 
 ---
 
-## 🏷️ Atributos ARIA Implementados
+## Atributos ARIA Implementados
 
 ### 1. `aria-invalid` y `aria-describedby`
 **Ubicación**: [Register.jsx](src/pages/user/Register.jsx), [AdminLogin.jsx](src/pages/admin/AdminLogin.jsx)
@@ -155,7 +155,7 @@ aria-describedby={errors.nombre ? "nombre-error" : undefined}
 
 ---
 
-## 🎮 Estados de Enfoque por Componente
+## Estados de Enfoque por Componente
 
 ### **UserNavbar.jsx** - Navegación de Usuario
 ```
@@ -280,7 +280,7 @@ Estado: Normal / Hover / Active / Disabled
 
 ---
 
-## ⌨️ Combinaciones de Teclado Soportadas
+## Combinaciones de Teclado Soportadas
 
 ### **1. Navegación Global**
 
