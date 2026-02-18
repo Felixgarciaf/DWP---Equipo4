@@ -1,28 +1,29 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import * as userModel from "../models/user.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import * as authModel from "../models/user.model.js";
 
 export const register = async (data) => {
 
     const { name, email, address, water_meter, password } = data;
 
     if (!name || !email || !address || !water_meter || !password) {
-        throw new Error("Todos los campos son obligatorios");
+        throw new ApiError(400, "Todos los campos son obligatorios");
     }
 
-    const existingEmail = await userModel.findByEmail(email);
+    const existingEmail = await authModel.findByEmail(email);
     if (existingEmail) {
-        throw new Error("El correo ya está registrado");
+        throw new ApiError(400, "El correo ya está registrado");
     }
 
-    const existingMeter = await userModel.findByWaterMeter(water_meter);
+    const existingMeter = await authModel.findByWaterMeter(water_meter);
     if (existingMeter) {
-        throw new Error("El medidor ya está registrado");
+        throw new ApiError(400, "El medidor ya está registrado");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    return await userModel.createUser({
+    const userId = await authModel.createUser({
         name,
         email,
         address,
@@ -30,45 +31,50 @@ export const register = async (data) => {
         password: hashedPassword,
         role: "user"
     });
+
+    return userId;
 };
 
 export const login = async (email, password) => {
 
-    if (!email || !password) {
-        throw new Error("Email y contraseña requeridos");
-    }
-
-    const user = await userModel.findByEmail(email);
+    const user = await authModel.findByEmail(email);
 
     if (!user) {
-        throw new Error("Credenciales inválidas");
+        throw new ApiError(401, "Credenciales inválidas");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        throw new Error("Credenciales inválidas");
+        throw new ApiError(401, "Credenciales inválidas");
     }
 
     if (!user.is_active) {
-        throw new Error("Usuario deshabilitado");
+        throw new ApiError(403, "Usuario deshabilitado");
     }
 
-    const token = jwt.sign(
-        {
-            id: user.id,
-            role: user.role
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES }
+    const accessToken = jwt.sign(
+        { id: user.id, role: user.role },
+        process.env.JWT_ACCESS_SECRET,
+        { expiresIn: process.env.ACCESS_EXPIRES }
     );
 
+    const refreshToken = jwt.sign(
+        { id: user.id },
+        process.env.JWT_REFRESH_SECRET,
+        { expiresIn: process.env.REFRESH_EXPIRES }
+    );
+
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+    await authModel.saveRefreshToken(user.id, refreshToken, expiresAt);
+
     return {
-        token,
+        accessToken,
+        refreshToken,
         user: {
             id: user.id,
             name: user.name,
-            email: user.email,
             role: user.role
         }
     };

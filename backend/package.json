@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Este modulo corresponde al **backend en Express** del proyecto _DWP – Equipo 4_.Su propósito es mostrar las acciones y accesos disponibles para los usuarios, gestionando su identidad digital y garantizando un acceso seguro al resto de las funcionalidades de la aplicación web.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",

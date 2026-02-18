@@ -31,5 +31,20 @@ export const createUser = async (user) => {
         ]
     );
 
-    return { id: result.insertId, ...user };
+    return result.insertId;
+};
+
+export const saveRefreshToken = async (userId, token, expiresAt) => {
+    await db.query(
+        `INSERT INTO refresh_tokens (user_id, token, expires_at)
+         VALUES (?, ?, ?)`,
+        [userId, token, expiresAt]
+    );
+};
+
+export const deleteRefreshToken = async (token) => {
+    await db.query(
+        "DELETE FROM refresh_tokens WHERE token = ?",
+        [token]
+    );
 };
