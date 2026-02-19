@@ -9,3 +9,7 @@ Este módulo corresponde a la **Base de datos en MySQL** del proyecto _DWP – E
 ## 🖇️ Integración
 
 Este módulo está diseñado para ser consumido por el backend de la aplicación mediante un conector MySQL, permitiendo realizar operaciones CRUD y consultas avanzadas a través de una capa de acceso a datos.
+
+# Acceder a base de datos
+
+docker exec -it mysql-dev mysql -u root -p

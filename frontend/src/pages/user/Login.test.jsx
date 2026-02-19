@@ -1,7 +1,14 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './Login';
+
+// mock auth service
+vi.mock('../../services/api', () => ({
+  auth: { login: vi.fn() }
+}));
+
+import { auth } from '../../services/api';
 
 const renderWithRouter = (component) => {
   return render(<BrowserRouter>{component}</BrowserRouter>);
@@ -35,5 +42,16 @@ describe('Login Component', () => {
     renderWithRouter(<Login />);
     const inicioButtons = screen.getAllByText('Inicio');
     expect(inicioButtons.length).toBeGreaterThan(0);
+  });
+
+  it('muestra loader mientras se hace login', async () => {
+    auth.login.mockResolvedValue({ user: { nombre: 'test' } });
+    renderWithRouter(<Login />);
+    fireEvent.change(screen.getByLabelText(/Usuario:/i), { target: { value: 'foo' } });
+    fireEvent.change(screen.getByLabelText(/Contraseña:/i), { target: { value: 'bar' } });
+    fireEvent.click(screen.getByText('Iniciar sesión'));
+
+    expect(screen.getByRole('status')).toBeInTheDocument();
+    await waitFor(() => expect(auth.login).toHaveBeenCalled());
   });
 });

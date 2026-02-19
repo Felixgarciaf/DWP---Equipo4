@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import "../../styles/styles.css";
+import Loader from "../../components/Loader";
+import { auth } from "../../services/api";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -13,10 +15,11 @@ export default function Login() {
   const [mensajeError, setMensajeError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const manejarLogin = () => {
+  const manejarLogin = async () => {
+    // basic client validation
     let hayError = false;
 
-    if (usuario.trim()) {
+    if (!usuario.trim()) {
       setErrorUsuario(true);
       userRef.current?.focus();
       hayError = true;
@@ -24,7 +27,7 @@ export default function Login() {
       setErrorUsuario(false);
     }
 
-    if (password.trim()) {
+    if (!password.trim()) {
       setErrorPassword(true);
       hayError = true;
     } else {
@@ -39,11 +42,17 @@ export default function Login() {
     setMensajeError("");
     setLoading(true);
 
-    setTimeout(() => {
-      localStorage.setItem("user", usuario);
-      setLoading(false);
+    try {
+      const data = await auth.login({ email: usuario, password });
+      // success: store token, user etc.
+      localStorage.setItem("user", data.user?.nombre || usuario);
       navigate("/home");
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      setMensajeError(err.message || "Error al iniciar sesión");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -71,8 +80,9 @@ export default function Login() {
         )}
 
         <div className="form-group">
-          <label>Usuario:</label>
+          <label htmlFor="usuario">Usuario:</label>
           <input
+            id="usuario"
             type="text"
             value={usuario}
             onChange={(e) => {
@@ -93,8 +103,9 @@ export default function Login() {
         </div>
 
         <div className="form-group">
-          <label>Contraseña:</label>
+          <label htmlFor="password">Contraseña:</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(e) => {
@@ -114,7 +125,7 @@ export default function Login() {
           )}
         </div>
 
-        <div className="login-actions">
+        <div className="login-actions" aria-busy={loading ? "true" : "false"}>
           <button
             className="btn-secondary"
             onClick={() => navigate("/register")}
@@ -128,10 +139,14 @@ export default function Login() {
             onClick={manejarLogin}
             disabled={loading}
           >
-            {loading ? "Cargando..." : "Iniciar sesión"}
+            {loading ? (
+              <>
+                <Loader message="Iniciando sesión..." />
+              </>
+            ) : (
+              "Iniciar sesión"
+            )}
           </button>
-          
-
         </div>
         </form>
       </div>

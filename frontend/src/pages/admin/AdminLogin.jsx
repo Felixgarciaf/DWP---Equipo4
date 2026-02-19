@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/styles.css";
+import Loader from "../../components/Loader";
+import { auth } from "../../services/api";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ export default function AdminLogin() {
     return nuevosErrores;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validacion = validar();
@@ -50,11 +52,16 @@ export default function AdminLogin() {
     setMensajeError("");
     setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const data = await auth.login({ email: user, password });
       localStorage.setItem("admin", "true");
-      setLoading(false);
       navigate("/admin/dashboard");
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      setMensajeError(err.message || "Error al iniciar sesión");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -132,7 +139,7 @@ export default function AdminLogin() {
             className="btn-admin-login"
             disabled={loading}
           >
-            {loading ? "Cargando..." : "Iniciar sesión"}
+            {loading ? <Loader message="Iniciando sesión..." /> : "Iniciar sesión"}
           </button>
 
         </form>
