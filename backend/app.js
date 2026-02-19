@@ -7,9 +7,21 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 const app = express();
 
 // allow our frontend origin and send cookies for auth (refresh token)
+// NB: vite sometimes picks a different port (5173, 5174, …) so we allow
+// any localhost:517x address and also permit a custom FRONTEND_URL via env.
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      // allow requests with no origin (e.g. curl, mobile apps)
+      if (!origin) return callback(null, true);
+      const allowed = process.env.FRONTEND_URL || '';
+      const isLocal517 = origin.startsWith('http://localhost:517');
+      if (origin === allowed || isLocal517) {
+        return callback(null, true);
+      }
+      console.warn('CORS blocked origin', origin);
+      return callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );
@@ -21,6 +33,15 @@ app.use("/api/auth", authRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3010;
+
+// log some environment info for debugging
+console.log("Inicio del servidor con variables:", {
+  PORT,
+  DB_HOST: process.env.DB_HOST,
+  DB_PORT: process.env.DB_PORT,
+  DB_NAME: process.env.DB_NAME,
+  FRONTEND_URL: process.env.FRONTEND_URL,
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);

@@ -12,10 +12,37 @@ services:
       - /app/node_modules      
     environment:
       - VITE_PORT=5173
-
       - CHOKIDAR_USEPOLLING=true 
+      # during development we proxy /api to backend; keep base url relative
+      - VITE_API_BASE_URL=/api
+      # tell vite dev server how to reach backend from inside container
+      - VITE_PROXY_TARGET=http://backend:3010
     stdin_open: true           
     tty: true
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend-dev
+    ports:
+      - "3010:3010"
+    environment:
+      - DB_HOST=mysql-dev
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=dwp4_app
+      # secrets for JWT (replace with strong values in production)
+      - JWT_ACCESS_SECRET=supersecretaccess
+      - JWT_REFRESH_SECRET=supersecretrefresh
+      - ACCESS_EXPIRES=15m
+      - REFRESH_EXPIRES=7d
+      - FRONTEND_URL=http://localhost:5173
+    depends_on:
+      - mysql
 
   mysql: 
     image: mysql:latest
