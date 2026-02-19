@@ -23,6 +23,7 @@ export const register = async (data) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+
     const userId = await authModel.createUser({
         name,
         email,

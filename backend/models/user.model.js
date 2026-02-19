@@ -17,6 +17,7 @@ export const findByWaterMeter = async (waterMeter) => {
 };
 
 export const createUser = async (user) => {
+    console.log(user)
     const [result] = await db.query(
         `INSERT INTO users 
         (name, email, address, water_meter, password, role)
