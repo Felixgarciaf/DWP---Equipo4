@@ -1,5 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+
+// mock hook to provide predictable data
+vi.mock('../../hooks/useFetch', () => ({
+  default: vi.fn(() => ({ data: [{ id: 1, title: 'T', description: 'D' }], error: null, loading: false })),
+}));
+
 import Notifications from './Notifications';
 
 describe('Notifications Component', () => {

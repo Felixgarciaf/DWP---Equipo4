@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/styles.css";
+import Loader from "../../components/Loader";
+import { auth } from "../../services/api";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -53,7 +55,7 @@ export default function Register() {
     return nuevosErrores;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validacion = validar();
@@ -68,11 +70,16 @@ export default function Register() {
     setMensaje("");
     setLoading(true);
 
-    setTimeout(() => {
+    try {
+      const data = await auth.register(form);
       localStorage.setItem("user", form.nombre);
-      setLoading(false);
       navigate("/home");
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      setMensaje(err.message || "Error al registrar");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -206,7 +213,7 @@ export default function Register() {
             </div>
           </div>
 
-          <div className="register-footer">
+          <div className="register-footer" aria-busy={loading ? "true" : "false"}>
             <span className="login-link">
               ¿Ya tienes una cuenta?{" "}
               <button
@@ -230,7 +237,7 @@ export default function Register() {
               className="btn-register"
               disabled={loading}
             >
-              {loading ? "Registrando..." : "Registrarse"}
+              {loading ? <Loader message="Registrando..." /> : "Registrarse"}
             </button>
           </div>
 

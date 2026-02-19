@@ -83,4 +83,14 @@ Luego abre en el navegador:
 - Administrador: `http://localhost:5173/admin`
 
 📌 Nota
-Este frontend está desacoplado del backend y preparado para integrarse posteriormente mediante servicios REST o APIs, permitiendo que el desarrollo de ambos módulos de manera independiente.
+Este frontend está desacoplado del backend y preparado para integrarse mediante servicios REST o APIs. Se incluye un pequeño cliente en `src/services/api.js` que maneja peticiones y errores.
+
+Por defecto la base apunta a `http://localhost:3010/api` (el backend corre en el puerto 3010 y expone sus rutas bajo `/api`). Si tu servidor usa otro puerto o dominio puedes definir `VITE_API_BASE_URL` en un archivo `.env` del frontend, por ejemplo:
+
+```env
+VITE_API_BASE_URL=http://localhost:3010/api
+```
+
+De no establecerla, el código usará el valor por defecto.
+
+Las vistas de autenticación (`Login`, `Register`) ya consumen los endpoints del backend y muestran **loaders accesibles** (componente `Loader`) mientras esperan las respuestas. Los formularios también manejan y muestran mensajes de error provenientes del servidor.
